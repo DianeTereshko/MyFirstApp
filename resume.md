@@ -38,5 +38,5 @@
 Подробное резюме по запросу.
 #####  Контакты:
 Диана; заряженный Фрилансер, web-developer, +79199307985 (для связи отправьте пожалуйста сначала SMS), e-mail: DianeFLTereshko@gmail.com
-##### Contacts
+##### Contacts:
 Diane, charged Freelancer, web-developer, +79199307985 (for contact please send SMS first) e-mail: DianeFLTereshko@gmail.com

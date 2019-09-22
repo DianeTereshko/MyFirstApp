@@ -37,6 +37,8 @@
 Ожидания по зарплате: 40 тыс. рублей в месяц или проектно.
 Подробное резюме по запросу.
 #####  Контакты:
-Диана; заряженный Фрилансер, web-developer, +79199307985 (для связи отправьте пожалуйста сначала SMS), e-mail: DianeFLTereshko@gmail.com
+Диана; заряженный Фрилансер, web-developer, +79199307985 (для связи отправьте пожалуйста сначала SMS), 
+e-mail: DianeFLTereshko@gmail.com
 ##### Contacts:
-Diane, charged Freelancer, web-developer, +79199307985 (for contact please send SMS first) e-mail: DianeFLTereshko@gmail.com
+Diane, charged Freelancer, web-developer, +79199307985 (for contact please send SMS first), 
+e-mail: DianeFLTereshko@gmail.com

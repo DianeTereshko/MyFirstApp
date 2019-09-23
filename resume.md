@@ -2,7 +2,7 @@
 
 #####  Стеки разработки web-приложений: 
 
-* Front End: Angular, jQuery, HTML5, CSS3, CSS-анимация, JavaScript/TypeScript
+* Front End: Angular, HTML5, CSS3, CSS-анимация, JavaScript/TypeScript
 * Back End: ASP.NET Core, ASP.NET Web API, Identity, EntityFramework, MSSQL
 
 #####  Кратко стиль разработки:

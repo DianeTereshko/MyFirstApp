@@ -1,0 +1,88 @@
+﻿@model Article
+@inject IBlogService _BlogService
+@{
+    ViewData["Title"] = "EditArticle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditArticle</h1>
+@functions
+{
+
+    IEnumerable<SelectListItem>
+        getItems()
+    {
+        foreach (var item in _BlogService.GetSubCategories())
+        {
+            yield return
+
+                new SelectListItem { Text = item.Name, Value = item.Name };
+
+        }
+    }
+
+}
+<form method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                <label asp-for="SubCategory.Name">Подкатегория недоступна для редактирования</label>
+            </td>
+            <td>
+                <select asp-items="getItems()" asp-for="SubCategory.Name" disabled="disabled"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Name">Введите новое название статьи</label>
+            </td>
+            <td>
+                <textarea type="text" cols="50" rows="5" asp-for="Name"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Description">Введите новый краткий анонос статьи</label>
+            </td>
+            <td>
+                <textarea type="text" asp-for="Description" maxlength="280" cols="50" rows="5"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Raiting">Введите новый рейтинг статьи</label>
+            </td>
+            <td>
+                <input type="text" asp-for="Raiting" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Ссылка на картинку в ленте</label>
+            </td>
+            <td>
+                <input type="file" name="blogImage" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="ArticleDetail.Text">Bootstrap статья</label>
+            </td>
+            <td>
+                <textarea asp-for="ArticleDetail.Text" cols="50" rows="5"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="ArticleDetail.LinkToFlipBook">Новая ссылка на Flip Book</label>
+                <label>Ссылка должна быть вида:</label><br/>
+                <label>/upload/flip_article/article_777/index.html</label>
+            </td>
+            <td>
+                <input type="text" asp-for="ArticleDetail.LinkToFlipBook"/>
+            </td>
+        </tr>
+    </table>
+    <button asp-area="Admin" asp-controller="Default" asp-action="EditArticle">Отправить</button>
+</form>
+

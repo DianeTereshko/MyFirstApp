@@ -1,0 +1,61 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<h1>@ViewData["Title"]</h1>
+<style type="text/css">
+    form div table label input span button a {
+        font-family: 'Tahoma', sans-serif;
+        font-size: 16px;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <h4>Создание нового локального аккаунта</h4>
+    <hr />
+    <div asp-validation-summary="All"></div>
+    <table>
+        <tr>
+            <td><label asp-for="Input.Email">Введите E-mail</label></td>
+            <td> <input asp-for="Input.Email" required/></td>
+            <td><span asp-validation-for="Input.Email"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Input.UserName" >Введите имя пользователя</label></td>
+            <td><input asp-for="Input.UserName" required/></td>
+            <td><span asp-validation-for="Input.UserName"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Input.Password">Введите пароль</label></td>
+            <td><input asp-for="Input.Password" required/></td>
+            <td><span asp-validation-for="Input.Password"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Input.ConfirmPassword">Еще раз введите пароль</label></td>
+            <td><input asp-for="Input.ConfirmPassword" required/></td>
+            <td><span asp-validation-for="Input.ConfirmPassword"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Зарегистрироваться</button></td>
+        </tr>
+        <tr>
+            <td><a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Уже зарегистрированы? Вам сюда</a></td>
+        </tr>
+        <tr>
+            <td> <a asp-area="Main" asp-controller="Default" asp-action="Index">Продолжить без регистрации</a></td>
+        </tr>
+    </table>
+</form>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

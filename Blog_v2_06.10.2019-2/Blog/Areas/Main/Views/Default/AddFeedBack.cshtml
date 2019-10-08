@@ -1,0 +1,17 @@
+﻿@model Blog.Services.Models.FeedBack
+@{
+    ViewData["Title"] = "AddFeedBack";
+    Layout = "~/Areas/Main/Views/Shared/_Layout.cshtml";
+}
+<div class="w3-container w3-medium w3-padding">
+    <h4>Форма обратной связи</h4>
+    <p>Я готова ответить на любые вопросы, чтобы связаться со мной напишите сообщение, постараюсь ответить максимально быстро</p>
+    <form method="post" class="w3-small">
+        <input type="text" asp-for="Name" value="Введите ваше имя" class="w3-small" />
+        <input type="text" asp-for="Contact" value="Куда отправить ответ" class="w3-small" />
+        <input type="text" asp-for="FeedBackMessage" value="Напишите сообщение" class="w3-small" />
+        <button type="submit" asp-area="Main" asp-controller="Default" asp-action="AddFeedBack" class="w3-button w3-ext-animate-button w3-ext-animate-button">Отправить</button>
+    </form>
+</div>
+<hr/>
+

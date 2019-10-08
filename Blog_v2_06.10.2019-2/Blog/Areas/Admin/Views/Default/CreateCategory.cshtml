@@ -1,0 +1,12 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CreateCategory</h1>
+<form method="post">
+    <label asp-for="Name">Введите категорию</label>
+    <input asp-for="Name" />
+    <button asp-area="Admin" asp-controller="Default" asp-action="CreateCategory">Создать</button>
+</form>

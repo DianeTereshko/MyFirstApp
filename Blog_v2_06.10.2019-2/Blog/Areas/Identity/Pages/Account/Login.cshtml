@@ -1,0 +1,57 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Страница входа";
+}
+<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" asp-append-version="true">
+<style type="text/css">
+    form div table label input span button a {
+        font-family: 'Tahoma', sans-serif;
+        font-size: 16px;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+<form id="account" method="post">
+    <h4>Используйте локальный аккаунт для входа</h4>
+    <hr />
+    <div asp-validation-summary="All"></div>
+
+    <table>
+        <tr>
+            <td> <label asp-for="Input.Email">Имя пользователя</label></td>
+            <td> <input asp-for="Input.Email" /></td>
+            <td>
+                <span asp-validation-for="Input.Email"></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label asp-for="Input.Password">Пароль</label> </td>
+            <td><input asp-for="Input.Password" /></td>
+            <td><span asp-validation-for="Input.Password"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Input.RememberMe">Сохранить пароль?</label></td>
+            <td><input asp-for="Input.RememberMe" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Войти</button></td>
+        </tr>
+        <tr>
+            <td><a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Новый пользователь? Вам сюда</a></td>
+        </tr>
+        <tr>
+            <td><a asp-area="Main" asp-controller="Default" asp-action="Index">Продолжить без входа</a></td>
+        </tr>
+    </table>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

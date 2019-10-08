@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AspNetCore</title>
+
+    <environment include="Development">
+        <link href="~/assets/css/w3pro.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/assets/css/site.css" rel="stylesheet" asp-append-version="true" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    </environment>
+    <environment exclude="Development">
+    </environment>
+</head>
+<body>
+    <section class="w3-row-padding">
+        @await Component.InvokeAsync("AdminMenuHeader")
+    </section>
+    <section class="w3-padding">
+        <a asp-area="Admin" asp-controller="Default" asp-action="Category" class="w3-bar-item w3-button w3-ext-animate-button">Менеджер категорий</a>
+        <a asp-area="Admin" asp-controller="Default" asp-action="Article" class="w3-bar-item w3-button w3-ext-animate-button">Менеджер статей</a>
+        <a asp-area="Admin" asp-controller="Default" asp-action="Users" class="w3-bar-item w3-button w3-ext-animate-button">Менеджер пользователей</a>
+        <a asp-area="Admin" asp-controller="Default" asp-action="Comment" class="w3-bar-item w3-button w3-ext-animate-button">Менеджер комментариев</a>
+    </section>
+    <section class="w3-row-padding">
+        @RenderBody()
+    </section>
+
+
+    <environment include="Development">
+        <script src="~/assets/npm/jquery.js"></script>
+        <script src="~/js/site.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

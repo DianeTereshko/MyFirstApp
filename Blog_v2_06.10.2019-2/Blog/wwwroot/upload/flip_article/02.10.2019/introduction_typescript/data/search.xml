@@ -1,0 +1,297 @@
+﻿<?xml version = "1.0" encoding = "UTF-8"?>
+<eBook>
+  <page pageNumber = "1">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   1 
+ 
+Тема: Введение в TypeScript 
+Чтобы начать разработку с таким фреймворком как angular сначала 
+нужно немного упростить сам процесс разработки чтобы уяснить 
+основные моменты работы с TypeScript, npm и Visual Studio Code 
+Сейчас клиентские приложения пишутся на современном 
+TypeScript. TypeScript – это язык который компилируется в JavaScript 
+и размещается на странице в привычном виде. 
+TypeScript разрабатывается с участием Microsoft, и поэтому 
+реализация TypeScript удобнее, логичнее и понятнее, все в духе 
+стандартов качества Microsoft 
+Преимущество TypeScript над JavaScript в том, что JavaScript не 
+выдает ошибок, если у нас ошибка в JavaScript коде, то мы не 
+узнаем в чем ошибка, код просто исполнится, а в чем ошибка мы 
+не узнаем. TypeScript – компилируемый, при компиляции 
+TypeScript в JavaScript мы увидим список ошибок, таких как 
+несоответствие типов, количество параметров аргументов, и 
+вообще множество других ошибок, которые мы допустили в коде. 
+Еще преимуществами TypeScript является то, что в нем 
+реализованы удобные принципы и различные фишки: 
+• Можно создавать интерфейсы и на основании их 
+реализовывать классы (интерфейс это как бы договор о том 
+что будет реализовано в классе, создав интерфейс и 
+реализовав его в классе мы сможем объявлять не класс, а 
+интерфейс как тип данных, что тоже может отсеять множество 
+ошибок) 
+• Есть блоки try, catch для обработки ошибок.  
+• Можно создавать пространства имен для того, чтобы 
+разделять наш код на области 
+• Есть удобные асинхронные методы async/await 
+• Так же в TS есть отличный оператор подстановки переменных 
+в строку (очень удобно подставлять переменные из цикла) ]]></text>
+  </page>
+  <page pageNumber = "2">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   2 
+ 
+• Еще одно важное преимущество заключается в том, что мы 
+можем использовать сторонние библиотеки в TypeScript, 
+скачанные из NPM. TypeScript открывает двери к миллионам 
+библиотек размещенным в NPM 
+Все эти фишки TypeScript мы разберем следующей статье. В этой 
+статье я расскажу, как установить TypeScript, устанавливать пакеты 
+npm и как установить легкий Web Server в Visual Studio Code 
+TypeScript – это как бы удобное средство разработки клиентского 
+кода и размещение его в виде обычного JavaScript в html 
+Подготовим шаблончик для разработки фронтенда на TypeScript 
+Установка сервера и npm 
+1. Установите NodeJS и npm 
+https://nodejs.org/en/download/ 
+Проверка что node.js и npm установились 
+node -v 
+npm -v 
+2. Установите Visual Studio Code, в меню установки поставе 
+галочку чтобы можно было открывать папку из контекстного 
+меню Windows10 
+3. Создайте пустую папку и откройте ее в Visual Studio Code 
+Пкл на папке -> open with Visual Studio Code 
+4. Далее инициируем создание менеджера пакетов npm 
+package. json 
+npm init 
+В диалоге все оставляем по умолчанию нажимая enter. Появится 
+файл package. json 
+5. Далее нужно установить web-сервер для запуска нашего 
+клиентского приложения 
+npm install lite-server --save-dev 
+ ]]></text>
+  </page>
+  <page pageNumber = "3">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   3 
+ 
+6. Дале в файле package. json нужно указать что будет 
+запускается именно lite-server, это указывается в параметре 
+start, добавьте параметр "start": "lite-server", 
+{ 
+  "name": "package.json", 
+  "version": "1.0.0", 
+  "description": "", 
+  "main": "index.js", 
+  "scripts": { 
+    "start": "lite-server", 
+    "test": "echo \"Error: no test specified\" && exit 1" 
+  }, 
+ 
+ 
+7. Запустите lite – сервер командой npm start (не забудьте 
+добавить параметр start в package. json) 
+npm start 
+ 
+8. Если вы сейчас запустите сервер, то получите ошибку  
+Cannot GET / 
+ 
+Ошибка пугает, особенно когда вы нашли интересный проект на 
+GitHub и пытаетесь открыть его, причина проста - нет стартового 
+файла 
+9. Создайте стартовый файл в корне проекта, назовите его 
+index.html 
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-
+scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <title>Document</title> 
+</head> 
+<body> 
+<p>hello world!</p> 
+</body> 
+</html> ]]></text>
+  </page>
+  <page pageNumber = "4">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   4 
+ 
+ 
+ 
+Если нужно изменить стартовый файл укажите в параметре main 
+нужный файл  
+10.  Еще раз запустите Lite Server, и вы увидите html страницу 
+npm start 
+ 
+Установка TypeScript 
+1. Открываем терминал в Visual Studio Code и устанавливаем 
+TypeScript компилятор глобально 
+• При установке npm пакета глобально – мы можем 
+использовать его команды в терминале 
+• Если у Вас терминал занят Lite-сервером нажмите плюсик в 
+окне терминала, так у Вас будет два терминала 
+работающие параллельно, и вы сможете переключатся 
+между ними 
+Terminal -> new terminal 
+ 
+npm install -g typescript 
+2. Все пакеты npm, установленные глобально можно посмотреть 
+командой 
+npm list -g --depth=0 
+ 
+3. Пакеты npm установленные не глобально можно посмотреть 
+аналогичной командой без параметра -g 
+npm list --depth=0 
+ 
+4. Далее создаем файл конфигурации TypeScript 
+tsc --init 
+ ]]></text>
+  </page>
+  <page pageNumber = "5">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   5 
+ 
+5. В файле конфигурации TypeScript нам нужно задать из каких 
+папок мы будем брать TS файлы и в какую сохранять 
+скомпилированные JS 
+В сгенерированном файле конфигурации tsconfig.json параметр 
+outdir - это то где мы будем сохранять скомпилированные JS 
+файлы, массив rootDirs – из каких папок мы будем компилировать 
+файлы TS, обратите внимание что путь к папкам относительный 
+точка со слешем обозначает на одну папку ниже от корневой 
+{ 
+  "compilerOptions": { 
+    "target": "es6",  
+    "module": "commonjs",  
+    "outDir": "./js/",  
+    "strict": true,  
+    "rootDirs": [ "./ts/" ],  
+    "esModuleInterop": true  
+  } 
+} 
+ 
+ 
+6. При установке npm пакета нам нужно устанавливать и сам 
+пакет и Type Definition File для нее. TDF нам нужен чтобы все 
+ресурсы библиотек (функции, классы и интерфейсы) были 
+доступны в TypeScript файле 
+7. С TDF вы сможете подключать модули как модули commonJS и 
+без размещения самой JS библиотеки в html файле, 
+скомпоновав ее с использованием browserify 
+• Установив TDF, мы можем не подключать библиотеку к TS 
+файлу, и все пространство имен библиотеки, IntelliSence от не 
+будет работать как будто библиотека подключена 
+• Установив TDF из npm, мы можем использовать 
+подключенное пространство имен в любой части приложения, 
+в любом файле TypeScript или если библиотек, скачанных из 
+npm много, мы можем использовать их все в одном TypeScript 
+файле 
+8. Для примера установим jQuery и TDF для нее ]]></text>
+  </page>
+  <page pageNumber = "6">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   6 
+ 
+npm install jquery -save-dev 
+npm i @types/jquery -save-dev 
+И Axios 
+npm i axios -save-dev 
+npm i @types/axios -save-dev 
+ 
+9. Далее установите следующий пакет 
+npm i @types/node 
+Этот пакет сделает доступным функцию require 
+10.  Далее установите глобально browserify, он умеет 
+склеивать JS библиотеки и ваш код на JS 
+npm install -g browserify 
+ 
+11.  Создайте file.ts в папке /ts/ 
+/ts/file.ts 
+ 
+И разместите в ней TypeScript код 
+import testJQuery = require('jquery'); 
+import myAxios = require("axios") 
+testJQuery("#my-button").on("click", function () { 
+    alert("jQuery works!"); 
+}); 
+  
+var url = "https://jsonplaceholder.typicode.com/todos"; 
+console.log("hello"); 
+var data = myAxios.default.get(url).then(function (responce) { 
+    console.log(responce.data); 
+}); 
+ 
+ 
+Набирая require IntelliSence подскажет вам все доступные 
+пространства имен, в том числе и TDF 
+Библиотека Axios умеет получать данные из внешнего API, для 
+доступа к библиотеке мы можем задать любой префикс, например ]]></text>
+  </page>
+  <page pageNumber = "7">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   7 
+ 
+myAxios, вы можете задать любой префикс доступа, который вам 
+будет удобней 
+12.  Структура файлов 
+ 
+ 
+ 
+ 
+13.  Напечатав testJQuery в файле TS благодаря 
+@types/jQuery (Type Definition File) будут доступны все 
+функции и классы библиотеки 
+ 
+14.  Далее нужно скомпилировать TS в JS. Компиляция 
+выполняется командой tsc в терминале 
+tsc 
+ 
+file.ts скомпилируется и переместится в папку 
+assets/compiled/app.js 
+15.  Склеиваем библиотеки jQuery, Axios и код 
+скомпилированного JS файла в один файл bundle.js 
+browserify assets/compiled/app.js > assets/compiled/bundle.js ]]></text>
+  </page>
+  <page pageNumber = "8">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   8 
+ 
+ 
+16.  Разместите в HTML: 
+• Склеенный файл bundle.js 
+• Добавьте кнопочку 
+<!DOCTYPE html> 
+<html lang="en"> 
+  
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-
+scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <title>Document</title> 
+</head> 
+  
+<body> 
+<button id="my-button">Click me</button> 
+</body> 
+<script src="./js/bundle.js"></script> 
+  
+</html> 
+ 
+ 
+17.  Запускаем проект 
+npm start 
+ 
+18.  Смотрим что одновременно работают и jQuery, и Axios в 
+одном файле (в браузере должно вывестись сообщение 
+jQuery Works и через Axios данные из API в консоль) 
+ ]]></text>
+  </page>
+  <page pageNumber = "9">
+     <text><![CDATA[TYPESCRIPT/JAVASCRIPT                     DIANEFLTERESHKO@GMAIL.COM   9 
+ 
+ 
+ 
+ 
+19.  Теперь вы можете изучать TypeScript, компилировать его 
+в JS, исследовать npm в поисках интересных проектов, писать 
+полноценные приложения на современном TypeScript и сразу 
+же просматривать результат в браузере. Поплавав немного в 
+тайпскрипте можно переходить к изучению Angular ]]></text>
+  </page>
+</eBook>

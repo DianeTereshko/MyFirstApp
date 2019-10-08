@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\upload\flip_article\article_777\**" />
+    <Content Remove="wwwroot\upload\flip_article\article_777\**" />
+    <EmbeddedResource Remove="wwwroot\upload\flip_article\article_777\**" />
+    <None Remove="wwwroot\upload\flip_article\article_777\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Extensions\NoCache.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TypeScript\modal.ts" />
+    <None Remove="TypeScript\navigation.ts" />
+    <None Remove="TypeScript\search.ts" />
+    <None Remove="TypeScript\tabbs.ts" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Landing\Data\" />
+    <Folder Include="Areas\Landing\Models\" />
+    <Folder Include="Areas\Main\Data\" />
+    <Folder Include="Areas\Main\Models\" />
+    <Folder Include="Areas\Membership\Data\" />
+    <Folder Include="Areas\Membership\Models\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\assets\compiled\" />
+    <Folder Include="wwwroot\assets\npm\" />
+    <Folder Include="wwwroot\upload\download_files\" />
+    <Folder Include="wwwroot\upload\avatar\" />
+    <Folder Include="wwwroot\upload\comment_files\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <TypeScriptCompile Include="TypeScript\modal.ts" />
+    <TypeScriptCompile Include="TypeScript\navigation.ts" />
+    <TypeScriptCompile Include="TypeScript\search.ts" />
+    <TypeScriptCompile Include="TypeScript\tabbs.ts" />
+  </ItemGroup>
+
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

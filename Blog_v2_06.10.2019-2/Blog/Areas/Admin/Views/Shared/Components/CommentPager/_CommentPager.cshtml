@@ -1,0 +1,31 @@
+﻿@model Blog.Services.Models.PagedResultBase
+@{
+
+    var startIndex = Math.Max(Model.CurrentPage - 5, 1);
+    var finishIndex = Math.Min(Model.CurrentPage + 5, Model.PageCount);
+}
+
+@if (Model.PageCount > 1)
+{
+    <div class="w3-center">
+        <div class="w3-bar w3-small">
+            @*Предыдущая*@
+            <a asp-area="Admin" asp-controller="Default" asp-action="Comment" asp-route-paging="1" class="w3-bar-item w3-button w3-ext-animate-button">&#10094; Предыдущая</a>
+            @for (var i = startIndex; i <= finishIndex; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    @*Текущая*@
+                    <span class="w3-bar-item w3-button w3-green w3-ext-animate-button">@i</span>
+                }
+                else
+                {
+                    @*Все остальные не текущие*@
+                    <a asp-area="Admin" asp-controller="Default" asp-action="Comment" asp-route-paging="@i.ToString()" class="w3-bar-item w3-button w3-ext-animate-button">@i</a>
+                }
+            }
+            @*Следующая*@
+            <a asp-area="Admin" asp-controller="Default" asp-action="Comment" asp-route-paging="@Model.PageCount.ToString()" class="w3-bar-item w3-button w3-ext-animate-button">Следующая &#10095;</a>
+        </div>
+    </div>
+}

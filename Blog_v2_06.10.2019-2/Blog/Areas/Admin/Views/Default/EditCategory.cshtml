@@ -1,0 +1,13 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditCategory</h1>
+<form method="post">
+    <label asp-for="Name">Измените категорию</label>
+    <input asp-for="Name" type="text" />
+    <button asp-area="Admin" asp-controller="Default" asp-action="EditCategory">Изменить</button>
+</form>
+

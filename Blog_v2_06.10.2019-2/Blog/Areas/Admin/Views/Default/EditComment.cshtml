@@ -1,0 +1,12 @@
+﻿@model Comment
+@{
+    ViewData["Title"] = "EditComment";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditComment</h1>
+<form method="post">
+    <label asp-for="Message">Отредактируйте комментарий</label>
+    <input asp-for="Message" />
+    <button asp-area="Admin" asp-controller="Default" asp-action="EditComment">Сохранить</button>
+</form>

@@ -1,0 +1,399 @@
+﻿@model Blog.Services.Models.ArticleDetail
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Blog.Services.Models.User> _SignInManager;
+
+
+@{
+
+    ViewData["Title"] = "Article";
+    Layout = "~/Areas/Main/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<!--Body Start-->
+<!--BreadCumb Start-->
+<div id="hidder">
+
+
+    <div>
+        <a asp-area="Main" asp-controller="Default" asp-action="Index" asp-route-category="@Model.Article.SubCategory.Category.Id" class="w3-button w3-small w3-ext-animate-button">@Model.Article.SubCategory.Category.Name<i class="fas fa-angle-double-right w3-padding"></i></a>
+        <a asp-area="Main" asp-controller="Default" asp-action="Index" asp-route-subcategory="@Model.Article.SubCategory.Id" class="w3-button w3-small w3-ext-animate-button">@Model.Article.SubCategory.Name</a>
+    </div>
+    <!--BreadCumb End-->
+    <!--Article Likes Start-->
+    <div class="w3-container w3-right">
+        <div>
+            <a id="up" class="btn btn-success fa fa-thumbs-up float-right w3-animate-bottom"><span id="Like" сlass="badge badge-light">@Model.Like</span></a>
+        </div>
+        <div>
+            <a id="down" class="btn btn-danger fa fa-thumbs-down float-right w3-animate-bottom"><span id="UnLike">@Model.Unlike</span></a>
+        </div>
+    </div>
+    <!--Article Likes End-->
+    <!--Article Start-->
+    <hr />
+    <div class="w3-padding">
+        <p class="w3-large w3-center">@Model.Name</p>
+        <img src="@Url.Content(Model.Image)" alt="image not found" class="w3-ext-image-center w3-image w3-ext-img-size">
+        <br /><br />
+        @if (Model.Text != null)
+        {
+            <section>
+                @Html.Raw(Model.Text)
+            </section>
+        }
+        <br />
+        @if (Model.LinkToFlipBook != null)
+        {
+            <div class="w3-container">
+                <a onclick="return show_modal();" class="w3-button w3-ext-animate-button w3-white w3-border w3-border-red w3-round-large">Прочитать статью</a>
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-top w3-card-4">
+                        <header class="w3-container w3-teal">
+                            <span onclick="document.getElementById('id01').style.display='none'"
+                                  class="w3-button w3-display-topright">&times;</span>
+                            <h2>@Model.Article.Name</h2>
+                        </header>
+                        <div class="w3-container">
+                            <iframe src="@Url.Content(Model.LinkToFlipBook + '?' + DateTime.Now.Ticks)" style="width: 860px; height: 800px" id="my-frame"></iframe>
+                        </div>
+                        <footer class="w3-container w3-teal">
+                            <p>Клонирую CSS анимацию <a asp-area="Snatch" asp-controller="Default" asp-action="Index">перейти</a></p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @*<iframe src=@Url.Content("https://localhost:44354/upload/flip_article/article_777/index.html?DateTime.Now.Ticks") style="width:860px; height:800px" id="theframe"></iframe>
+        <iframe src=@Url.Content("https://localhost:44354/upload/flip_article/03.10.2019/mail_sending/index.html?@DateTime.Now.Ticks") style="width:860px; height:800px" id="theframe2"></iframe>*@
+    <script>
+            window.addEventListener("load", initiate);
+
+            function show_modal() {
+                console.log("click");
+                //todo сделать удаление local storage(по другому он называется web-storage или DOM Storage), когда мы удаляем в Chrome web-storage и перезагружаем страницу все работает
+                console.log(sessionStorage.length);
+                sessionStorage.clear();
+                console.log(sessionStorage.length);
+                document.getElementById('id01').style.display = 'block';
+            }
+
+            function initiate() {
+                console.log("load");
+
+                frameElement.src = "@Url.Content(Model.LinkToFlipBook + '?' + DateTime.Now.Ticks)";
+
+                //frameElement.contentWindow.location.href = frameElement.src;
+                //var article = document.getElementById("theframe");
+                //article.contentWindow.location.href = article.src;
+                //var article2 = document.getElementById("theframe2");
+                //article.contentWindow.location.href = article2.src;
+                //document.getElementById("theframe").contentDocument.location.reload(true);
+                //document.getElementById("theframe2").contentDocument.location.reload(true);
+                //parent.frames["theframe"].window.location.reload();
+                //parent.frames["theframe2"].window.location.reload();
+                //var article = document.getElementById("theframe");
+                //article.src = "";
+                //article.window.location.reload();
+                //var article2 = document.getElementById("theframe2");
+                //article2.src = "";
+                //article2.window.location.reload();
+            }
+    </script>
+
+    <!--Article End-->
+    <!-- Video Start-->
+    @foreach (var item in Model.Video)
+    {
+        @if (Model.Video.Count != 0)
+        {
+            <div class="w3-padding">
+                <p class="w3-center">@item.Title</p>
+                <iframe width="600" height="700" src="@item.Url" class="w3-image w3-ext-image-center"></iframe>
+                <p class="w3-center">@item.Description</p>
+            </div>
+            <hr>
+        }
+    }
+    <!--Video End-->
+    <!--Files Start-->
+    <div>
+        @if (!User.IsInRole("Block"))
+        {
+            @foreach (var item in Model.Download)
+            {
+                @if (Model.Download.Count != 0)
+                {
+                    <p>Файлы, которые можно скачать</p>
+                    <span>@item.Title</span>
+                    <a href="@item.Url" download class="w3-button w3-ext-animate-button">Скачать<i class="fa fa-download w3-padding"></i></a>
+                    <br>
+                }
+            }
+            @if (Model.OuterDownladLink.Count != 0)
+            {
+
+                @foreach (var item in Model.OuterDownladLink)
+                {
+                    <span>@item.Title</span>
+                    <a href="@item.FileShareLink" download class="w3-button w3-ext-animate-button">Скачать<i class="fa fa-download w3-padding"></i></a>
+                    <br>
+                }
+            }
+        }
+
+    </div>
+    <hr />
+
+    @if (!_SignInManager.IsSignedIn(User))
+    {
+        <p>Комментировать статью могут только зарегистрированные пользователи</p>
+        <p>Пожалуйста пройдите простую процедуру регистрации </p>
+        <p><a asp-area="Identity" asp-page="/Account/Login" class="w3-bar-item w3-button w3-ext-animate-button">Зарегистрироваться<i class="far fa-edit w3-small"></i></a></p>
+        <hr />
+    }
+
+    @if (User.IsInRole("Block"))
+    {
+        <p>Заблокированные пользователи не могут скачивать файлы и оставлять комментарии</p>
+    }
+    <!--Files End-->
+    <!--Comment Form Start-->
+
+    @if (!Model.Comment.Any())
+    {
+        <p>К этой статье не оставили ни одного комментария</p>
+        <hr />
+    }
+
+    @if (_SignInManager.IsSignedIn(User) && !User.IsInRole("Block"))
+    {
+        <p>Добавление комментария</p>
+        <hr />
+        <form method="post" enctype="multipart/form-data" class="w3-padding">
+            <p>Введите комментарий</p>
+            <textarea name="message" class="w3-input"></textarea>
+            <br>
+            <div>
+                <label name="linkToFile">Можете приложить файл:</label>
+                <br>
+                <input type="file" name="linkToFile" class="w3-button w3-round-small w3-ext-animate-button" />
+            </div>
+            <button type="submit" asp-area="Main" asp-controller="Default" asp-action="Article" asp-route-articleId="@Model.Article.Id" class="w3-button w3-ext-animate-button w3-border w3-round-medium w3-right w3-small">Запостить комментарий</button>
+        </form>
+    }
+    <!--Comment Form End-->
+    <!--Comment Start-->
+    @if (Model.Comment.Any())
+    {
+        <div class="w3-padding">
+            <p class="w3-large">Комментарии:</p>
+        </div>
+    }
+    <!--Comment 1 Start-->
+    @foreach (var item in Model.Comment.OrderByDescending(d => d.Date))
+    {
+        <div class="w3-padding">
+            <div>
+                <img src="~/upload/avatar/img_avatar3.png" asp-append-version="true" class="w3-left w3-circle w3-ext-avatar w3-padding" />
+                <a>@item.UserName</a>
+                добавил сообщение
+                <div>в @item.Date</div>
+            </div>
+            <div class="w3-padding">
+                <p>@item.Message</p>
+            </div>
+            @if (!String.IsNullOrEmpty(item.LinkToFile))
+            {
+                @if (_SignInManager.IsSignedIn(User) && !User.IsInRole("Block"))
+                {
+                    <div class="w3-padding">
+                        <span>Приложенные файлы:</span>
+                        <div>
+                            <span>
+                                <a href="@item.LinkToFile" download class="w3-button w3-ext-animate-button">
+                                    Скачать
+                                    <i class="fa fa-download w3-padding">
+                                    </i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                }
+            }
+            <div>
+                <span class="w3-right">
+                    <a id="@item.Id+CL">@item.Like</a>
+                    <a onclick="postCommentLike(this)" mytag="@item.Id" id="commentup">
+                        <i class="fas fa-thumbs-up w3-small"></i>
+                    </a>
+                </span>
+                <span class="w3-right">
+                    <a id="@item.Id+CU">@item.Unlike</a>
+                    <a onclick="postCommentDisLike(this)" mytag="@item.Id" id="commentdown">
+                        <i class="fas fa-thumbs-down w3-small"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+        <hr />
+    }
+
+    <!--Comment 1 End-->
+    <!-- Comment End -->
+    <!--End Body-->
+</div>
+
+@section Scripts
+{
+    @*<script src="~/assets/compiled/tabbs.js" asp-append-version="true"></script>*@
+    @*<script src="~/assets/compiled/Scrolling.js" asp-append-version="true"></script>
+        <script src="~/assets/npm/scroll-lock.js"></script>*@
+    <script src="~/assets/compiled/modal.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    $('#id01').modal('show');
+        //});
+        //window.addEventListener("load", initiate);
+
+        //function initiate() {
+        //    console.log("load");
+        //    //var article = document.getElementById("theframe");
+        //    //article.contentWindow.location.href = article.src;
+        //    //var article2 = document.getElementById("theframe2");
+        //    //article.contentWindow.location.href = article2.src;
+        //    //document.getElementById("theframe").contentDocument.location.reload(true);
+        //    //document.getElementById("theframe2").contentDocument.location.reload(true);
+        //    //parent.frames["theframe"].window.location.reload();
+        //    //parent.frames["theframe2"].window.location.reload();
+        //    var article = document.getElementById("theframe");
+        //    article.src = "";
+        //    article.window.location.reload();
+        //    var article2 = document.getElementById("theframe2");
+        //    article2.src = "";
+        //    article2.window.location.reload();
+        //}
+    </script>
+
+    <script>
+
+        $("document").ready(function() {
+            $("#up").on("click",
+                function() {
+                    var articleId = @Model.Id;
+                    sendLike(articleId);
+
+                });
+            $("#down").on("click",
+                function() {
+                    var articleId = @Model.Id;
+                    sendUnLike(articleId);
+                });
+        });
+
+        function postCommentLike(obj) {
+            //console.log(obj);
+            var commentId = obj.getAttribute("mytag");
+            //console.log(commentId);
+            sendCommentLike(commentId);
+        }
+
+        function postCommentDisLike(obj) {
+            //console.log(obj);
+            var commentId = obj.getAttribute("mytag");
+            //console.log(commentId);
+            sendCommentUnLike(commentId);
+        }
+
+        function sendLike(articleId) {
+            console.log(articleId);
+            $.ajax({
+                url: "/main/default/addlike/",
+                type: "POST",
+                dataType: "text",
+                cache: false,
+                data: { articleId },
+                success: function(result) {
+                    console.log("Данные успешно отправлены в MVC");
+                    console.log("Данные успешно вернулись из MVC");
+                    console.log("Вернувшиеся данные:" + result);
+                    document.getElementById("Like").innerHTML = result;
+                },
+                error: function(xhr) {
+                    //console.log(xhr.status);
+                },
+                complete: function(xhr) {
+                    //console.log(xhr.status);
+                }
+            });
+        }
+
+        function sendUnLike(articleId) {
+            console.log(articleId);
+            $.ajax({
+                url: "/main/default/addunlike/",
+                type: "POST",
+                dataType: "text",
+                cache: false,
+                data: { articleId },
+                success: function(result) {
+                    console.log("Данные успешно отправлены в MVC");
+                    console.log("Данные успешно вернулись из MVC");
+                    console.log("Вернувшиеся данные:" + result);
+                    document.getElementById("UnLike").innerHTML = result;
+                },
+                error: function(xhr) {
+                    //console.log(xhr.status);
+                },
+                complete: function(xhr) {
+                    //console.log(xhr.status);
+                }
+            });
+        }
+
+        function sendCommentLike(commentId) {
+            console.log(commentId);
+            $.ajax({
+                url: "/main/default/AddCommentLike/",
+                type: "POST",
+                dataType: "text",
+                cache: false,
+                data: { commentId },
+                success: function(result) {
+                    console.log(commentId);
+                    var expression = commentId + "+CL";
+                    console.log(expression);
+                    document.getElementById(expression).innerHTML = result;
+
+                },
+                error: function(xhr) {
+                },
+                complete: function(xhr) {
+                }
+            });
+        }
+
+        function sendCommentUnLike(commentId) {
+            console.log(commentId);
+            $.ajax({
+                url: "/main/default/AddCommentUnlike/",
+                type: "POST",
+                dataType: "text",
+                cache: false,
+                data: { commentId },
+                success: function(result) {
+                    var expression = commentId + "+CU";
+                    console.log(expression);
+                    document.getElementById(expression).innerHTML = result;
+                },
+                error: function(xhr) {
+                },
+                complete: function(xhr) {
+                }
+            });
+        }
+    </script>
+}

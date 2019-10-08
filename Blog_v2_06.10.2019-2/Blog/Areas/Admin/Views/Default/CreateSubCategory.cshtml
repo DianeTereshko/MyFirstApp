@@ -1,0 +1,32 @@
+﻿@model Category
+@inject IBlogService _BlogService
+@{
+    ViewData["Title"] = "CreateSubCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CreateSubCategory</h1>
+
+@functions
+{
+
+    IEnumerable<SelectListItem> getItems()
+    {
+        foreach (var item in _BlogService.GetCategories())
+        {
+            yield return
+
+                new SelectListItem { Text = item.Name, Value = item.Name };
+
+        }
+    }
+
+}
+<form method="post">
+    <label asp-for="@Model.Name">Выберите категорию</label>
+    <select asp-items="getItems()" asp-for="@Model.Name"></select>
+    <label>Введите название подкатегории</label>
+    <input name="subCategoryName" />
+    <button asp-area="Admin" asp-controller="Default" asp-action="CreateSubCategory">Добавить</button>
+</form>
+

@@ -863,6 +863,7 @@ namespace Blog.Services.DbService
                 Description = newArticle8.Description,
                 Article = newArticle8
             };
+
             Article newArticle9 = new Article()
             {
                 Name = "What is Lorem Ipsum?",
@@ -881,7 +882,26 @@ namespace Blog.Services.DbService
                 Article = newArticle9
             };
 
-            await _context.AddRangeAsync(newArticle, newArticleDetail, newArticle2, newArticleDetail2, newArticle3, newArticleDetail3, newArticle4, newArticleDetail4, newArticle5, newArticleDetail5, newArticle6, newArticleDetail6, newArticle7, newArticleDetail7, newArticle8, newArticleDetail8, newArticle9, newArticleDetail9);
+            Article newArticle10 = new Article()
+            {
+                Name = "Flip Article!",
+                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+                ImageLink = "/upload/blog_images/77f5f609-9352-40cc-9ad1-8bf763f3e5a2t1.jpg",
+                Raiting = 5,
+                SubCategory = subCategory3Category3
+            };
+
+            ArticleDetail newArticleDetail10 = new ArticleDetail()
+            {
+                Text = "",
+                Image = newArticle10.ImageLink,
+                Name = newArticle10.Name,
+                Description = newArticle10.Description,
+                Article = newArticle10,
+                LinkToFlipBook = "/upload/flip_article/02.10.2019/introduction_typescript/index.html"
+            };
+
+            await _context.AddRangeAsync(newArticle10, newArticleDetail10, newArticle, newArticleDetail, newArticle2, newArticleDetail2, newArticle3, newArticleDetail3, newArticle4, newArticleDetail4, newArticle5, newArticleDetail5, newArticle6, newArticleDetail6, newArticle7, newArticleDetail7, newArticle8, newArticleDetail8, newArticle9, newArticleDetail9);
             await _context.SaveChangesAsync();
             return true;
         }

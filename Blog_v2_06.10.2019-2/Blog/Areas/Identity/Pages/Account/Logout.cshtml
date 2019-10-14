@@ -1,9 +1,0 @@
-﻿@page
-@model LogoutModel
-@{
-    ViewData["Title"] = "";
-}
-
-<form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Default", new {area = "Main"})">
-    <button type="submit" class="w3-bar-item w3-button w3-mobile">Выйти</button>
-</form>

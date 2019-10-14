@@ -1,9 +1,0 @@
-﻿DELETE FROM dbo.About
-DELETE FROM dbo.Subscriber
-DELETE FROM dbo.FeedBack
-DELETE FROM dbo.Author
-DELETE FROM dbo.Comment
-DELETE FROM dbo.Video
-DELETE FROM dbo.OuterDownladLink
-DELETE FROM dbo.ArticleDetail
-DELETE FROM dbo.Article
